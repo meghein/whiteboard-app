@@ -11,12 +11,12 @@ const ACTIONS = {
 
 export default function reducer(state, action) {
   switch (action.type) {
-    case ACTIONS.IMPORTS:
+    case 'import':
       let tempState = [...state.imports];
       tempState.push({id: Date.now(), image: action.payload});
       return({...state, imports: tempState})
     
-    case ACTIONS.IMAGES:
+    case 'image':
       tempState =  [...state.images];
       tempState.push({
         id: Date.now(),

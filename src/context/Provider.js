@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import reducer from '../reducer/reducer'
 const StateContext = createContext();
-const UpdateContext = createContext();
+const DispatchContext = createContext();
 
 export function useStateContext() {
   return useContext(StateContext)
 }
 
-export function useUpdateContext() {
-  return useContext(UpdateContext)
+export function useDispatchContext() {
+  return useContext(DispatchContext)
 }
 export default function Provider({children}) {
   const [state, dispatch] = useReducer(reducer, {
@@ -22,9 +22,9 @@ export default function Provider({children}) {
   })
   return (
     <StateContext.Provider value={state}>
-      <UpdateContext.Provider value={dispatch}>
+      <DispatchContext.Provider value={dispatch}>
         {children}
-      </UpdateContext.Provider>
+      </DispatchContext.Provider>
     </StateContext.Provider>
   )
 }
