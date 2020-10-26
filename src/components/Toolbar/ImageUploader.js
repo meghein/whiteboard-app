@@ -1,9 +1,10 @@
 import React, { createRef } from 'react';
-import { useChangeItems } from '../../context/AppProvider'
+import { useDispatchContext } from 'context/Provider'
+import { ACTIONS } from 'reducer/app'
 
 export default function ImageUploader() { 
   const fileUploadEl = createRef();
-  const addCanvasItem = useChangeItems()
+  const dispatch = useDispatchContext()
 
   // Uses ref of input to run 'fileChange'
   const addImage = () => {
@@ -16,7 +17,7 @@ export default function ImageUploader() {
     const reader = new FileReader();
     reader.readAsDataURL(file)
     reader.addEventListener("load", () => {
-      addCanvasItem('import', reader.result)   
+      dispatch({type: ACTIONS.IMPORTS, payload: reader.result})   
     });
   };
 

@@ -14,19 +14,19 @@ export { ACTIONS }
 export default function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.IMPORTS:
-      let tempState = [...state.imports];
-      tempState.push({id: Date.now(), image: action.payload});
-      return({...state, imports: tempState})
+      const tempImports = [...state.imports];
+      tempImports.push({id: Date.now(), image: action.payload});
+      return({...state, imports: tempImports})
     
     case ACTIONS.IMAGES:
-      tempState =  [...state.images];
-      tempState.push({
+      const tempImages =  [...state.images];
+      tempImages.push({
         id: Date.now(),
         src: action.payload,
         x: window.innerWidth * Math.random(),
         y: window.innerHeight * Math.random(),
       })
-      return({...state, images: tempState})
+      return({...state, images: tempImages})
 
     case ACTIONS.TARGET_SHAPE:
       return({...state, targetShape: action.payload})

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useStateContext, useDispatchContext } from 'context/Provider';
-// import useDragDrop from '../../hooks/useDragDrop';
 import { ACTIONS } from 'reducer/app'
+// import useDragDrop from 'hooks/useDragDrop';
 import './style.scss';
 
 export default function Imports() {
   const state = useStateContext();
-  const {dispatch} = useDispatchContext();
+  const dispatch = useDispatchContext();
   // const { onDragStart } = useDragDrop();
   const [toggle, setToggle] = useState(false)
   

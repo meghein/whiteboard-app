@@ -2,3 +2,18 @@
   grid-area: toolbar;
   border: 1px solid red;
 }
+
+.imports {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding: 1em;
+  img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
