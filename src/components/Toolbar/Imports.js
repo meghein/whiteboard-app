@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useStateContext, useDispatchContext } from '../../context/Provider';
 // import useDragDrop from '../../hooks/useDragDrop';
+import { ACTIONS } from '../../reducer/reducer.js'
 import './style.scss';
 
 export default function Imports() {
@@ -19,7 +20,7 @@ export default function Imports() {
   }, [state.imports])
 
   function handleImageClick(e) {
-    dispatch({type: 'image', payload: e.target.src})
+    dispatch({type: ACTIONS.IMAGES, payload: e.target.src})
   }
 
   return (
