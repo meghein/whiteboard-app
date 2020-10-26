@@ -57,7 +57,6 @@ export default function NewImage({image, index, isSelected}) {
     })
   }
 
-
   return (
     <>
       <Image
