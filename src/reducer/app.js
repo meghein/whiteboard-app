@@ -26,7 +26,6 @@ export default function reducer(state, action) {
         x: window.innerWidth * Math.random(),
         y: window.innerHeight * Math.random(),
       })
-      console.log(tempImages)
       return({...state, images: tempImages})
 
     case ACTIONS.TARGET_SHAPE:
@@ -35,9 +34,7 @@ export default function reducer(state, action) {
     case ACTIONS.CHANGE:
       const tempChanges = [...state[action.key]]
       tempChanges[action.index] = action.newAttrs;
-      console.log("tempChanges", tempChanges)
-      return({...state})
-
+      return({...state, [action.key]: tempChanges})
 
     default:
       return state

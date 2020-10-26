@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NewImage from './NewImage';
 import { useCanvas } from './index';
 
 export default function Items() {
   const state = useCanvas();
-
-  useEffect(() => {
-    console.log("item state", state)
-  }, [state])
 
   return (
     <>
