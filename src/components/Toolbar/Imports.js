@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useStateContext, useDispatchContext } from '../../context/Provider';
+import { useStateContext, useDispatchContext } from 'context/Provider';
 // import useDragDrop from '../../hooks/useDragDrop';
-import { ACTIONS } from '../../reducer/reducer.js'
+import { ACTIONS } from 'reducer/app'
 import './style.scss';
 
 export default function Imports() {
@@ -13,7 +13,7 @@ export default function Imports() {
   function toggleButton() {
     toggle ? setToggle(false) : setToggle(true)
   }
-
+  
   // open imports when a new file is uploaded
   useEffect(() => {
     setToggle(false)
