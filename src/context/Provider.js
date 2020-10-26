@@ -1,4 +1,5 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
+import reducer from '../reducer'
 const StateContext = createContext();
 const UpdateContext = createContext();
 
@@ -10,7 +11,7 @@ export function useUpdateContext() {
   return useContext(UpdateContext)
 }
 export default function Provider({children}) {
-  const [state, setState] = useState({
+  const [state, dispatch] = useReducer(reducer, {
     imports: [],
     images: [],
     text: [],
@@ -21,7 +22,7 @@ export default function Provider({children}) {
   })
   return (
     <StateContext.Provider value={state}>
-      <UpdateContext.Provider value={setState}>
+      <UpdateContext.Provider value={dispatch}>
         {children}
       </UpdateContext.Provider>
     </StateContext.Provider>
