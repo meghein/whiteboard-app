@@ -3,8 +3,8 @@ import './style.scss';
 
 export default function index() {
   return (
-    <div>
+    <header>
       
-    </div>
+    </header>
   )
 }
