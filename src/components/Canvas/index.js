@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import './style.scss';
 
 export default function index() {
   return (
-    <div className='background'>
+    <div id='canvas'>
       
     </div>
   )
