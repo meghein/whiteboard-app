@@ -1,23 +1,21 @@
 import React from 'react';
-import AppProvider from '../context/AppProvider'
-import Header from './Header'
-import Toolbar from './toolbar'
-import Canvas from './Canvas'
-import Imports from './toolbar/Imports'
-import Footer from './Footer'
-import './App.scss';
+import Provider from '../../context/Provider.js'
+import Canvas from '../Canvas'
+import Header from '../Header'
+import Toolbar from '../Toolbar'
+import Imports from '../Toolbar/Imports.js'
+import './style.scss';
 
 export default function App() {
 
   return (
     <div className="App">
-      <AppProvider>
+      <Provider>
         <Header/>
         <Toolbar/>
         <Canvas/>
         <Imports/>
-        <Footer/>
-      </AppProvider>
+      </Provider>
     </div>
   );
 }
