@@ -3,7 +3,7 @@ import './style.scss';
 
 export default function index() {
   return (
-    <div>
+    <div id='toolbar'>
       
     </div>
   )
