@@ -17,7 +17,6 @@ export default function NewImage({image, index, isSelected}) {
       transformRef.current.setNode(shapeRef.current);
       transformRef.current.getLayer().batchDraw();
     }
-    console.log('image:', image);
   }, [isSelected]);
   
   function handleSelect() {

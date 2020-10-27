@@ -19,7 +19,6 @@ export default function Canvas(props) {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const stageRef = useRef();
-  // const shapeRef = useRef();
 
   function handleDrop(e) {
     stageRef.current.setPointersPositions(e)
@@ -37,8 +36,8 @@ export default function Canvas(props) {
 
   return (
     <div id='canvas'
+      onDragOver={e => e.preventDefault()}
       onDrop={handleDrop}
-      onDragOver={(e) => e.preventDefault()}
     >
       <Stage
         container='canvas'
