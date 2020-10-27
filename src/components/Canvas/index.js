@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext, useRef, useEffect } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useStateContext, useDispatchContext } from 'context/Provider';
-import { ACTIONS } from 'reducer/app'
+import { ACTIONS } from 'reducer/app';
+import useFindShape from 'hooks/useFindShape'
 import Items from './Items';
 import './style.scss';
 
-// "bridged" context by creating a Provider as a child of the Stage
+// "bridged" context by creating a new Provider as a child of the Stage
 const CanvasState = createContext();
 const CanvasDispatch = createContext();
 export function useCanvas() {
@@ -15,14 +16,14 @@ export function useDispatch() {
   return useContext(CanvasDispatch)
 }
 
-export default function Canvas(props) {
+export default function Canvas() {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const stageRef = useRef();
+  const findShape = useFindShape()
 
   function handleDrop(e) {
     stageRef.current.setPointersPositions(e)
-    console.log(dispatch)
     dispatch({
       type: ACTIONS.IMAGES,
       payload: state.dragShape,
@@ -31,8 +32,27 @@ export default function Canvas(props) {
         y: stageRef.current.getPointersPositions()[0].y,
       }
     })
+    console.log(state)
   }
 
+  function handleDeselect(e) {
+    if (e.target === e.target.getStage() || e.target.hasName("container")) {
+      dispatch({type: ACTIONS.TARGET_SHAPE, payload: null})
+    }
+  }
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.keyCode === 8) {
+        console.log("e.target", e.target)
+        dispatch({type: ACTIONS.DELETE, payload: findShape(state, state.targetShape)})
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [state]);
 
   return (
     <div id='canvas'
@@ -44,6 +64,7 @@ export default function Canvas(props) {
         width={window.innerWidth}
         height={window.innerHeight}
         ref={stageRef}
+        onMouseDown={handleDeselect}
       >
         <CanvasState.Provider value={state}>
           <CanvasDispatch.Provider value={dispatch}>

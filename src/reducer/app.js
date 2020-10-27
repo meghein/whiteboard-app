@@ -8,6 +8,7 @@ const ACTIONS = {
   TARGET_SHAPE: 'TARGET_SHAPE',
   CHANGE: 'CHANGE',
   DRAG: 'DRAG',
+  DELETE: 'DELETE',
 }
 
 export { ACTIONS }
@@ -40,6 +41,19 @@ export default function reducer(state, action) {
     
     case ACTIONS.DRAG:
       return ({...state, dragShape: action.payload})
+
+    case ACTIONS.DELETE:
+      // const tempItems = [...state];
+        // const filteredArr = tempItems.filter(item => item !== tempItems[props.targetShape])
+        // props.setCanvasItems(filteredArr);
+        console.log("delete payload", action.payload)
+      //   if( JSON.stringify(state).indexOf("key_name") > -1 ) {
+      //     console.log("Key Found");
+      // }
+      // else{
+      //     console.log("Key not Found");
+      // }
+      return({...state})
 
     default:
       return state

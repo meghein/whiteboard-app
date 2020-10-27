@@ -14,16 +14,17 @@ export default function NewImage({image, index, isSelected}) {
   // add transformer to shape
   useEffect(() => {
     if (isSelected) {
-      transformRef.current.setNode(shapeRef.current);
+      transformRef.current.setNodes([shapeRef.current]);
       transformRef.current.getLayer().batchDraw();
     }
   }, [isSelected]);
   
-  function handleSelect() {
-    dispatch({type: ACTIONS.TARGET_SHAPE, payload: image.id})
+  function handleSelect(e) {
+    dispatch({type: ACTIONS.TARGET_SHAPE, payload: e.target.attrs.id})
   }
   
   function handleDragEnd(e) {
+    dispatch({type: ACTIONS.TARGET_SHAPE, payload: e.target.attrs.id})
     dispatch({
       type: ACTIONS.CHANGE, 
       key: 'images', 
