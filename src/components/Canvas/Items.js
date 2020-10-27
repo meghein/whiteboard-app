@@ -7,7 +7,7 @@ export default function Items() {
 
   return (
     <>
-      {state && state.images.map((image, index) => {
+      {state && state.canvasElements.map((image, index) => {
           return (
             <NewImage
               key={image.id}

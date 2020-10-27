@@ -27,7 +27,6 @@ export default function NewImage({image, index, isSelected}) {
     dispatch({type: ACTIONS.TARGET_SHAPE, payload: e.target.attrs.id})
     dispatch({
       type: ACTIONS.CHANGE, 
-      key: 'images', 
       index,
       newAttrs: {
         ...image,
@@ -44,8 +43,7 @@ export default function NewImage({image, index, isSelected}) {
     node.scaleX(1);
     node.scaleY(1);
     dispatch({
-      type: ACTIONS.CHANGE, 
-      key: 'images', 
+      type: ACTIONS.CHANGE,  
       index,
       newAttrs: {
         ...image,

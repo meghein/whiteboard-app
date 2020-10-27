@@ -21,7 +21,7 @@ export default function reducer(state, action) {
       return({...state, imports: tempImports})
     
     case ACTIONS.IMAGES:
-      const tempImages =  [...state.images];
+      const tempImages =  [...state.canvasElements];
       let x = window.innerWidth * Math.random()
       let y = window.innerHeight * Math.random()
       if(action.coordinates) {
@@ -29,31 +29,28 @@ export default function reducer(state, action) {
         y = action.coordinates.y
       }
       tempImages.push({id: Date.now(), src: action.payload, x, y})
-      return({...state, images: tempImages})
+      return({...state, canvasElements: tempImages})
 
     case ACTIONS.TARGET_SHAPE:
       return({...state, targetShape: action.payload})
 
     case ACTIONS.CHANGE:
-      const tempChanges = [...state[action.key]]
+      const tempChanges = [...state.canvasElements]
       tempChanges[action.index] = action.newAttrs;
-      return({...state, [action.key]: tempChanges})
+      return({...state, canvasElements: tempChanges})
     
     case ACTIONS.DRAG:
       return ({...state, dragShape: action.payload})
 
-    case ACTIONS.DELETE:
-      // const tempItems = [...state];
-        // const filteredArr = tempItems.filter(item => item !== tempItems[props.targetShape])
-        // props.setCanvasItems(filteredArr);
-        console.log("delete payload", action.payload)
-      //   if( JSON.stringify(state).indexOf("key_name") > -1 ) {
-      //     console.log("Key Found");
-      // }
-      // else{
-      //     console.log("Key not Found");
-      // }
-      return({...state})
+    // case ACTIONS.DELETE:
+    //   // const tempItems = [...state];
+    //     // const filteredArr = tempItems.filter(item => item !== tempItems[props.targetShape])
+    //     // props.setCanvasItems(filteredArr);
+    //     for (let key in state) {
+    //       state[key] === action.payload
+    //     }
+    //     console.log("delete payload", action.payload)
+    //   return({...state})
 
     default:
       return state

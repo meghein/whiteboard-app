@@ -13,11 +13,8 @@ export function useDispatchContext() {
 export default function Provider({children}) {
   const [state, dispatch] = useReducer(reducer, {
     imports: [],
-    images: [],
+    canvasElements: [],
     text: [],
-    circles: [],
-    rectangles: [],
-    draw: [],
     targetShape: null,
     dragShape: null,
   })
