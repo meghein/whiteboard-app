@@ -23,6 +23,10 @@ export default function Imports() {
     dispatch({type: ACTIONS.IMAGES, payload: e.target.src})
   }
 
+  function handleDrag(e) {
+    dispatch({type: ACTIONS.DRAG, payload: e.target.src})
+  }
+
   return (
     <div className='imports'>
       {toggle && <button onClick={toggleButton}>Imports</button>}
@@ -37,7 +41,7 @@ export default function Imports() {
               alt={item.id}
               key={index}
               onClick={handleImageClick}
-              // onDragStart={onDragStart}
+              onDragStart={handleDrag}
             />
         )})
       }

@@ -1,9 +1,9 @@
 import React from 'react';
-import Provider from '../../context/Provider.js'
+import Provider from 'context/Provider';
 import Canvas from '../Canvas'
 import Header from '../Header'
 import Toolbar from '../Toolbar'
-import Imports from '../Toolbar/Imports.js'
+import Imports from '../Toolbar/Imports'
 import './style.scss';
 
 export default function App() {

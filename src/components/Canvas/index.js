@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useStateContext, useDispatchContext } from 'context/Provider';
-// import useDragDrop from '../hooks/useDragDrop';
+import { ACTIONS } from 'reducer/app'
 import Items from './Items';
 import './style.scss';
 
@@ -15,23 +15,36 @@ export function useDispatch() {
   return useContext(CanvasDispatch)
 }
 
-export default function Canvas() {
+export default function Canvas(props) {
   const state = useStateContext();
   const dispatch = useDispatchContext();
-  // const { onDrop, onDragOver } = useDragDrop;
+  const stageRef = useRef();
+  // const shapeRef = useRef();
 
-  useEffect(() => {
-    console.log("canvas state", state);
-  }, [state])
+  function handleDrop(e) {
+    stageRef.current.setPointersPositions(e)
+    console.log(dispatch)
+    dispatch({
+      type: ACTIONS.IMAGES,
+      payload: state.dragShape,
+      coordinates: {
+        x: stageRef.current.getPointersPositions()[0].x,
+        y: stageRef.current.getPointersPositions()[0].y,
+      }
+    })
+  }
+
 
   return (
-    <div id='canvas'>
+    <div id='canvas'
+      onDrop={handleDrop}
+      onDragOver={(e) => e.preventDefault()}
+    >
       <Stage
         container='canvas'
         width={window.innerWidth}
         height={window.innerHeight}
-        // onDrop={onDrop}
-        // onDragOver={onDragOver}
+        ref={stageRef}
       >
         <CanvasState.Provider value={state}>
           <CanvasDispatch.Provider value={dispatch}>

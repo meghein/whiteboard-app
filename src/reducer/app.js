@@ -7,6 +7,7 @@ const ACTIONS = {
   DRAW: 'DRAW',
   TARGET_SHAPE: 'TARGET_SHAPE',
   CHANGE: 'CHANGE',
+  DRAG: 'DRAG',
 }
 
 export { ACTIONS }
@@ -20,12 +21,13 @@ export default function reducer(state, action) {
     
     case ACTIONS.IMAGES:
       const tempImages =  [...state.images];
-      tempImages.push({
-        id: Date.now(),
-        src: action.payload,
-        x: window.innerWidth * Math.random(),
-        y: window.innerHeight * Math.random(),
-      })
+      let x = window.innerWidth * Math.random()
+      let y = window.innerHeight * Math.random()
+      if(action.coordinates) {
+        x = action.coordinates.x
+        y = action.coordinates.y
+      }
+      tempImages.push({id: Date.now(), src: action.payload, x, y})
       return({...state, images: tempImages})
 
     case ACTIONS.TARGET_SHAPE:
@@ -35,6 +37,9 @@ export default function reducer(state, action) {
       const tempChanges = [...state[action.key]]
       tempChanges[action.index] = action.newAttrs;
       return({...state, [action.key]: tempChanges})
+    
+    case ACTIONS.DRAG:
+      return ({...state, dragShape: action.payload})
 
     default:
       return state

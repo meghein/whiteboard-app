@@ -19,6 +19,7 @@ export default function Provider({children}) {
     rectangles: [],
     draw: [],
     targetShape: null,
+    dragShape: null,
   })
   return (
     <StateContext.Provider value={state}>
