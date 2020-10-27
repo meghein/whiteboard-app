@@ -3,12 +3,12 @@ import { useDispatchContext } from 'context/Provider'
 import { ACTIONS } from 'reducer/app'
 
 export default function ImageUploader() { 
-  const fileUploadEl = createRef();
+  const fileRef = createRef();
   const dispatch = useDispatchContext()
 
   // Uses ref of input to run 'fileChange'
   const addImage = () => {
-    fileUploadEl.current.click();
+    fileRef.current.click();
   };
 
   // Uses FileReader.result (the user's file contents) to set an image
@@ -26,11 +26,10 @@ export default function ImageUploader() {
       <button onClick={addImage}>Add Image</button>
       <input
         type="file"
-        ref={fileUploadEl}
+        ref={fileRef}
         onChange={fileChange}
         style={{display: "none"}}
       />
-      {/* <img src={image}/> */}
     </>
   );
 }
