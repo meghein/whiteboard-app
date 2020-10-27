@@ -42,15 +42,12 @@ export default function reducer(state, action) {
     case ACTIONS.DRAG:
       return ({...state, dragShape: action.payload})
 
-    // case ACTIONS.DELETE:
-    //   // const tempItems = [...state];
-    //     // const filteredArr = tempItems.filter(item => item !== tempItems[props.targetShape])
-    //     // props.setCanvasItems(filteredArr);
-    //     for (let key in state) {
-    //       state[key] === action.payload
-    //     }
-    //     console.log("delete payload", action.payload)
-    //   return({...state})
+    case ACTIONS.DELETE:
+      const tempDelete = [...state.canvasElements];
+      const filteredElements = tempDelete.filter(elm => {
+        return elm.id !== action.payload
+      })
+      return({...state, canvasElements: filteredElements})
 
     default:
       return state

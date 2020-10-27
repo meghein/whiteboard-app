@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useRef, useEffect } from 'react';
+import React, { createContext, useContext, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useStateContext, useDispatchContext } from 'context/Provider';
 import { ACTIONS } from 'reducer/app';
-import useFindShape from 'hooks/useFindShape'
 import Items from './Items';
 import './style.scss';
 
@@ -20,7 +19,12 @@ export default function Canvas() {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const stageRef = useRef();
-  const findShape = useFindShape()
+
+  function handleKeyDown(e) {
+    if (e.keyCode === 8) {
+      dispatch({type: ACTIONS.DELETE, payload: state.targetShape})
+    }
+  }
 
   function handleDrop(e) {
     stageRef.current.setPointersPositions(e)
@@ -41,21 +45,11 @@ export default function Canvas() {
     }
   }
 
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.keyCode === 8) {
-        console.log("e.target", e.target)
-        dispatch({type: ACTIONS.DELETE, payload: findShape(state, state.targetShape)})
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [state]);
-
   return (
-    <div id='canvas'
+    <div
+      id='canvas'
+      tabIndex='0'
+      onKeyDown={handleKeyDown}
       onDragOver={e => e.preventDefault()}
       onDrop={handleDrop}
     >
